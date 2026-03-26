@@ -45,7 +45,7 @@ These are the deployable AI agent frameworks that individual repositories instal
 
 ### 1. Scheduling and Dispatch
 
-- Reads **declarative cron config** (`.github-cron`) from each participating repository.
+- Reads **declarative cron config** (`.github-supervisor`) from each participating repository.
 - Maintains an **indexed registry** of every schedule declared across the organisation.
 - Dispatches jobs to target repositories via **`repository_dispatch`** at the right time, without requiring each repo to manage its own GitHub Actions cron triggers.
 - Provides a single place to audit, add, modify, or suspend schedules organisation-wide.
@@ -126,7 +126,7 @@ github-intelligence-supervisor  ←→  github-intelligence-overwatch
          │                                    │
          │  reads schedules from              │  holds org-wide PAT
          ↓                                    ↓
-  .github-cron in each repo         all repos in organisation
+  .github-supervisor in each repo         all repos in organisation
          │
          │  dispatches via repository_dispatch
          ↓
@@ -162,5 +162,5 @@ github-intelligence-supervisor  ←→  github-intelligence-overwatch
 
 The supervisor requires:
 
-- `INTELLIGENCE_SUPERVISOR_TOKEN` — a Personal Access Token (PAT) with `repo` scope across the organisation, used to read `.github-cron` configs, query repository contents, and dispatch `repository_dispatch` events.
+- `INTELLIGENCE_SUPERVISOR_TOKEN` — a Personal Access Token (PAT) with `repo` scope across the organisation, used to read `.github-supervisor` configs, query repository contents, and dispatch `repository_dispatch` events.
 - Coordination with the `INTELLIGENCE_EMERGENCY_TOKEN` and `INTELLIGENCE_OVERWATCH_TOKEN` held by the emergency and overwatch repositories for operations that require write access beyond dispatch.
